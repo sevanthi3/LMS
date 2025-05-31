@@ -46,6 +46,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan('dev'));
 
+app.get("/", (req, res) => {
+  res.send("🚀 LMS Backend is Running Successfully!");
+});
+
 // Ensure uploads folder exists
 const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) {
