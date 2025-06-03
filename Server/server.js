@@ -18,7 +18,7 @@ config();
 
 const app = express();
 
-// CORS config to allow both local and deployed frontend
+// ✅ CORS setup
 const allowedOrigins = [
   'https://learning-management-system-roan.vercel.app',
   'http://localhost:5173'
@@ -35,10 +35,12 @@ app.use(
     },
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
     optionsSuccessStatus: 204,
   })
 );
+
+// ✅ Preflight requests
+app.options('*', cors());
 
 // Middlewares
 app.use(express.json());
@@ -112,7 +114,7 @@ app.post('/api/auth/signup', upload.single('avatar'), (req, res) => {
 app.post('/api/payment/create-order', async (req, res) => {
   try {
     const options = {
-      amount: 50000, // smallest unit
+      amount: 50000,
       currency: 'INR',
       receipt: 'receipt_order_74394'
     };
